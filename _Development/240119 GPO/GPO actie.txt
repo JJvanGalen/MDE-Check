@@ -1,0 +1,55 @@
+* Maak een nieuwe GPO met naam: CP Software MS Defender Check
+* Pak de ZIP file uit 
+* Importeer de GPO settings
+* Open de GPO
+	* Pas het pad aan
+	* Zet de actie om van 'Create/Update' naar 'Replace'
+* Koppel de GPO aan het domein
+
+====================================
+**Action Update 
+Task Name  MDE Check   
+ Author  ..\admin-reset   
+ Description     
+ Run only when user is logged on  S4U   
+ UserId  NT AUTHORITY\System   
+ Run with highest privileges  HighestAvailable   
+ Hidden  No   
+ Configure for  1.2   
+ Enabled  Yes 
+
+
+**Triggers
+1. At startup     
+ Delay task for  1 minute   
+ Repeat task every 10 minutes for a duration of 30 minutes     
+ Stop all running tasks at end of repetition duration  No   
+ Enabled  Yes   
+     
+2. Daily     
+ Activate  8-2-2024 09:30:00 Synchronize across time zones  No 
+ Enabled  Yes   
+     
+ Recur every 1 days     
+3. Daily     
+ Activate  9-2-2024 15:00:00 Synchronize across time zones  No 
+ Enabled  Yes   
+     
+ Recur every 1 days   
+
+**Actions
+1. Start a program     
+ Program/script  powershell.exe   
+ Arguments  -ExecutionPolicy Bypass -File C:\ProgramData\MDE\CheckMDE-RegistryAddRemove.ps1 
+
+**Settings 
+Stop if the computer ceases to be idle  No   
+ Restart if the idle state resumes  No   
+ Start the task only if the computer is on AC power  No   
+ Stop if the computer switches to battery power  No   
+ Start only if the following network connection is available  Any connection   
+ Allow task to be run on demand  Yes   
+ Run task as soon as possible after a scheduled start is missed  Yes   
+ Stop task if it runs longer than  Immediately   
+ If the running task does not end when requested, force it to stop  No   
+ If the task is already running, then the following rule applies  IgnoreNew 
