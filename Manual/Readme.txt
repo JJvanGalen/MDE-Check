@@ -6,3 +6,8 @@ Start het script 'install.cmd'
 
 
 Unzippen cmd: Expand-Archive -Force C:\path\to\archive.zip C:\where\to\extract\to
+
+
+Scheduled Task starten
+
+SCHTASKS /Run /TN "MDE Check"
